@@ -11,7 +11,7 @@ class ReportController extends Controller
     public function index(Request $r) {
         $from = $r->date('from') ?? today()->startOfMonth();
         $to   = $r->date('to')   ?? today()->endOfDay();
-        $orders = Order::with('items')->where('cashier_id', auth()->id())
+        $orders = Order::where('cashier_id', auth()->id())
             ->whereBetween('created_at', [$from, $to])
             ->where('status','!=','cancelled')
             ->latest()->get();
@@ -22,7 +22,7 @@ class ReportController extends Controller
     public function pdf(Request $r) {
         $from = $r->date('from') ?? today()->startOfMonth();
         $to   = $r->date('to')   ?? today()->endOfDay();
-        $orders = Order::with('items')->where('cashier_id', auth()->id())
+        $orders = Order::where('cashier_id', auth()->id())
             ->whereBetween('created_at', [$from, $to])
             ->where('status','!=','cancelled')->latest()->get();
         $total = $orders->sum('total');
