@@ -26,6 +26,17 @@ class CatalogController extends Controller
         abort_unless($product->is_active, 404);
         $related = Product::where('id','!=',$product->id)->where('gender',$product->gender)
             ->where('is_active',true)->limit(4)->get();
-        return view('customer.product', compact('product','related'));
+
+        $prev = Product::where('is_active', true)
+            ->where('id', '<', $product->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $next = Product::where('is_active', true)
+            ->where('id', '>', $product->id)
+            ->orderBy('id', 'asc')
+            ->first();
+
+        return view('customer.product', compact('product','related','prev','next'));
     }
 }
