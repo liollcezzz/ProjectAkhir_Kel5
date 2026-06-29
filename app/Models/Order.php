@@ -14,10 +14,14 @@ class Order extends Model
         'code','user_id','cashier_id','channel','status',
         'subtotal','tax','total','amount_paid','change_due',
         'customer_name','customer_phone','notes',
+        'snap_token','payment_status','payment_method','payment_details',
+        'shipping_method','shipping_cost','shipping_address',
+        'shipping_status','tracking_number',
     ];
     protected $casts = [
         'subtotal'=>'decimal:2','tax'=>'decimal:2','total'=>'decimal:2',
         'amount_paid'=>'decimal:2','change_due'=>'decimal:2',
+        'shipping_cost'=>'decimal:2',
     ];
 
     // ONE-TO-MANY
