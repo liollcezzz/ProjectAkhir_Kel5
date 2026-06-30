@@ -4,13 +4,13 @@
 @section('content')
 <form method="POST" action="{{ route('warehouse.inventory.categories',$product) }}" class="card p-6 max-w-xl">
   @csrf
-  <p class="text-sm text-ink-500 mb-4">Select all categories that apply (many-to-many).</p>
+  <p class="text-sm text-white/50 mb-4">Select all categories that apply (many-to-many).</p>
   @php $selected = $product->categories->pluck('id')->all(); @endphp
   <div class="grid grid-cols-2 gap-2">
     @foreach($categories as $c)
-      <label class="flex items-center gap-2 text-sm">
-        <input type="checkbox" name="categories[]" value="{{ $c->id }}" @checked(in_array($c->id,$selected))>
-        {{ $c->name }} <span class="text-xs text-ink-500">({{ $c->gender }})</span>
+      <label class="flex items-center gap-2 text-sm text-white/70">
+        <input type="checkbox" name="categories[]" value="{{ $c->id }}" @checked(in_array($c->id,$selected)) class="accent-brand-accent">
+        {{ $c->name }} <span class="text-xs text-white/40">({{ $c->gender }})</span>
       </label>
     @endforeach
   </div>
