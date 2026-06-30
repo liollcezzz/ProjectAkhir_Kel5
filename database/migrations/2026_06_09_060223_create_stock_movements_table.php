@@ -1,12 +1,11 @@
 <?php
-namespace App\Http\Controllers\Cashier;
 
 use App\Http\Controllers\Controller;
 use App\Models\{Order, OrderItem, Product, StockMovement};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PosController extends Controller
+return new class extends Controller
 {
     public function index(Request $r) {
         $q = trim((string) $r->get('q'));
