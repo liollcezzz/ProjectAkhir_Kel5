@@ -7,8 +7,8 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('orders', function (Blueprint $t) {
             $t->id();
-            $t->string('code')->unique();                       // e.g. ORD-20240101-0001
-            $t->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); // customer or null (walk-in)
+            $t->string('code')->unique();                       
+            $t->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); 
             $t->foreignId('cashier_id')->nullable()->constrained('users')->nullOnDelete();
             $t->enum('channel', ['online','pos'])->default('online');
             $t->enum('status', ['pending','paid','shipped','completed','cancelled'])->default('pending');
