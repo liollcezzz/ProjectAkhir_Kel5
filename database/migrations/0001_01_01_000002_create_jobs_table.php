@@ -1,23 +1,26 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-    public function up(): void {
-        Schema::create('products', function (Blueprint $t) {
-            $t->id();
-            $t->string('sku')->unique();
-            $t->string('name');
-            $t->string('slug')->unique();
-            $t->text('description')->nullable();
-            $t->enum('gender', ['men','women','unisex'])->default('unisex');
-            $t->decimal('price', 12, 2);
-            $t->unsignedInteger('stock')->default(0);
-            $t->string('image')->nullable();
-            $t->boolean('is_active')->default(true);
-            $t->timestamps();
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('jobs', function (Blueprint $table) {
+            $table->id();
+            $table->string('queue')->index();
+            $table->longText('payload');
+            $table->unsignedTinyInteger('attempts');
+            $table->unsignedInteger('reserved_at')->nullable();
+            $table->unsignedInteger('available_at');
+            $table->unsignedInteger('created_at');
         });
     }
-    public function down(): void { Schema::dropIfExists('products'); }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('jobs');
+    }
 };

@@ -3,7 +3,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -17,7 +16,7 @@ class UserSeeder extends Seeder
         foreach ($defs as [$role, $name, $email]) {
             User::updateOrCreate(
                 ['email' => $email],
-                ['name'=>$name,'role'=>$role,'password'=>Hash::make('password')]
+                ['name'=>$name,'role'=>$role,'password'=>'password']
             );
         }
     }
